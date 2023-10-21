@@ -1,0 +1,107 @@
+//A. Create an array with the values (1, 2, 3, 4, 5, 6, 7) and shuffle it:
+
+import java.util.Arrays;
+import java.util.Collections;
+
+public class ShuffleArray {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        System.out.println("Original Array: " + Arrays.toString(arr));
+
+        // Shuffle the array using Collections.shuffle()
+        Collections.shuffle(Arrays.asList(arr));
+
+        System.out.println("Shuffled Array: " + Arrays.toString(arr));
+    }
+}
+
+// B. Enter a Roman Number as input and convert it to an integer (ex IX = 9):
+
+import java.util.Scanner;
+
+public class RomanToInteger {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a Roman numeral: ");
+        String romanNumeral = scanner.nextLine();
+
+        int decimalValue = convertRomanToInteger(romanNumeral);
+        System.out.println("Decimal value: " + decimalValue);
+    }
+
+    public static int convertRomanToInteger(String romanNumeral) {
+        int decimalValue = 0;
+        int prevValue = 0;
+
+        for (int i = romanNumeral.length() - 1; i >= 0; i--) {
+            char romanChar = romanNumeral.charAt(i);
+            int currentValue = getRomanValue(romanChar);
+
+            if (currentValue >= prevValue) {
+                decimalValue += currentValue;
+            } else {
+                decimalValue -= currentValue;
+            }
+
+            prevValue = currentValue;
+        }
+
+        return decimalValue;
+    }
+
+    private static int getRomanValue(char romanChar) {
+        switch (romanChar) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+}
+
+
+//C. Check if the input is pangram or not (Pangram is a sentence that contains all the alphabet from a-z):
+
+import java.util.Scanner;
+
+public class PangramChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String sentence = scanner.nextLine().toLowerCase();
+
+        boolean isPangram = checkPangram(sentence);
+        System.out.println("Is the sentence a pangram? " + isPangram);
+    }
+
+    public static boolean checkPangram(String sentence) {
+        boolean[] alphabetFound = new boolean[26];
+
+        for (char c : sentence.toCharArray()) {
+            if (Character.isAlphabetic(c)) {
+                int index = c - 'a';
+                alphabetFound[index] = true;
+            }
+        }
+
+        for (boolean found : alphabetFound) {
+            if (!found) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}

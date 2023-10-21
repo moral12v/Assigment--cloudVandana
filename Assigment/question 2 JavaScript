@@ -1,0 +1,42 @@
+
+// A. Reverse every word in a sentence:
+
+function reverseWords(sentence) {
+    const words = sentence.split(' ');
+    const reversedWords = [];
+  
+    for (const word of words) {
+      let reversedWord = '';
+      for (let i = word.length - 1; i >= 0; i--) {
+        reversedWord += word[i];
+      }
+      reversedWords.push(reversedWord);
+    }
+  
+    return reversedWords.join(' ');
+  }
+  
+  const inputSentence = 'This is a sunny day';
+  const reversedSentence = reverseWords(inputSentence);
+  console.log(reversedSentence); // Output: shiT si a ynnus yad
+
+  
+// B. Sort an array in descending order:
+
+function sortArrayDescending(array) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[i] < array[j]) {
+          const temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+      }
+    }
+    return array;
+  }
+  
+  const inputArray = [1, 5, 3, 2, 4];
+  const sortedArray = sortArrayDescending(inputArray);
+  console.log(sortedArray); // Output: [5, 4, 3, 2, 1]
+  
